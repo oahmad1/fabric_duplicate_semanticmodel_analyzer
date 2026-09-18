@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Semantic Model Duplicate Finder Report</title>
+  <style>
+    body { margin: 0; font-family: Segoe UI, Arial, sans-serif; color: #1f2937; background: #f6f8fb; }
+    header { padding: 28px 36px; background: #243a5e; color: #fff; }
+    main { padding: 28px 36px; }
+    h1 { margin: 0 0 8px; font-size: 28px; }
+    h2 { margin-top: 0; }
+    table { width: 100%; border-collapse: collapse; background: #fff; box-shadow: 0 1px 4px rgba(0,0,0,.08); }
+    th, td { padding: 10px 12px; border-bottom: 1px solid #e5e7eb; text-align: left; vertical-align: top; }
+    th { background: #eef2f7; font-weight: 600; }
+    code { background: #eef2f7; border-radius: 4px; padding: 1px 4px; }
+    a { color: #0f5bd8; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .number { text-align: right; font-variant-numeric: tabular-nums; }
+    .card { margin-top: 24px; padding: 20px; background: #fff; border: 1px solid #e5e7eb; border-radius: 10px; box-shadow: 0 1px 4px rgba(0,0,0,.06); }
+    .common-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+    .common-grid ul { margin-top: 8px; padding-left: 20px; }
+    .common-grid li { margin: 4px 0; overflow-wrap: anywhere; }
+    .muted { color: #6b7280; }
+    .pill { display: inline-block; padding: 3px 8px; border-radius: 999px; font-size: 12px; font-weight: 600; background: #e5e7eb; }
+    .likely_duplicate { color: #064e3b; background: #d1fae5; }
+    .high_overlap { color: #7c2d12; background: #ffedd5; }
+    .partial_overlap { color: #1e3a8a; background: #dbeafe; }
+    @media (max-width: 900px) { .common-grid { grid-template-columns: 1fr; } main { padding: 18px; } header { padding: 22px 18px; } }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Semantic Model Duplicate Finder Report</h1>
+    <div>3 finding(s) met the configured threshold.</div>
+  </header>
+  <main>
+    <table>
+      <thead>
+        <tr>
+          <th>Classification</th>
+          <th>Confidence</th>
+          <th>Duplicate</th>
+          <th>Overlap</th>
+          <th>Left model</th>
+          <th>Right model</th>
+          <th>Shared tables</th>
+          <th>Shared columns</th>
+          <th>Shared measures</th>
+          <th>Details</th>
+        </tr>
+      </thead>
+      <tbody>
+<tr><td><span class="pill likely_duplicate">likely_duplicate</span></td><td>high</td><td class="number">1.0000</td><td class="number">1.0000</td><td>Dummy Enterprise BI<br><strong>Contoso Sales Certified</strong></td><td>Dummy Executive Reporting<br><strong>Contoso Sales Executive Copy</strong></td><td class="number">5</td><td class="number">16</td><td class="number">5</td><td><a href="#finding-1">View common objects</a></td></tr>
+<tr><td><span class="pill high_overlap">high_overlap</span></td><td>high</td><td class="number">0.7722</td><td class="number">0.8550</td><td>Dummy Enterprise BI<br><strong>Contoso Sales Certified</strong></td><td>Dummy Regional Sales<br><strong>Contoso Sales Regional Extended</strong></td><td class="number">5</td><td class="number">16</td><td class="number">3</td><td><a href="#finding-2">View common objects</a></td></tr>
+<tr><td><span class="pill high_overlap">high_overlap</span></td><td>high</td><td class="number">0.7722</td><td class="number">0.8550</td><td>Dummy Executive Reporting<br><strong>Contoso Sales Executive Copy</strong></td><td>Dummy Regional Sales<br><strong>Contoso Sales Regional Extended</strong></td><td class="number">5</td><td class="number">16</td><td class="number">3</td><td><a href="#finding-3">View common objects</a></td></tr>
+      </tbody>
+    </table>
+<section class="card" id="finding-1"><h2>1. Dummy Enterprise BI / Contoso Sales Certified &lt;-&gt; Dummy Executive Reporting / Contoso Sales Executive Copy</h2><div class="common-grid"><div><h3>Common tables</h3><ul><li><code>customer</code></li><li><code>date</code></li><li><code>geography</code></li><li><code>product</code></li><li><code>sales</code></li></ul></div><div><h3>Common columns</h3><ul><li><code>customer[customerkey] (int64)</code></li><li><code>customer[customername] (string)</code></li><li><code>customer[segment] (string)</code></li><li><code>date[datekey] (int64)</code></li><li><code>date[fiscalmonth] (string)</code></li><li><code>date[fiscalyear] (int64)</code></li><li><code>geography[country] (string)</code></li><li><code>geography[geographykey] (int64)</code></li><li><code>product[category] (string)</code></li><li><code>product[productkey] (int64)</code></li><li><code>sales[customerkey] (int64)</code></li><li><code>sales[discountamount] (decimal)</code></li><li><code>sales[orderdatekey] (int64)</code></li><li><code>sales[productkey] (int64)</code></li><li><code>sales[revenueamount] (decimal)</code></li><li><code>sales[saleskey] (int64)</code></li></ul></div><div><h3>Common measures</h3><ul><li><code>sales[average revenue per customer]</code></li><li><code>sales[discount rate]</code></li><li><code>sales[net revenue]</code></li><li><code>sales[revenue ytd]</code></li><li><code>sales[total revenue]</code></li></ul></div></div></section>
+<section class="card" id="finding-2"><h2>2. Dummy Enterprise BI / Contoso Sales Certified &lt;-&gt; Dummy Regional Sales / Contoso Sales Regional Extended</h2><div class="common-grid"><div><h3>Common tables</h3><ul><li><code>customer</code></li><li><code>date</code></li><li><code>geography</code></li><li><code>product</code></li><li><code>sales</code></li></ul></div><div><h3>Common columns</h3><ul><li><code>customer[customerkey] (int64)</code></li><li><code>customer[customername] (string)</code></li><li><code>customer[segment] (string)</code></li><li><code>date[datekey] (int64)</code></li><li><code>date[fiscalmonth] (string)</code></li><li><code>date[fiscalyear] (int64)</code></li><li><code>geography[country] (string)</code></li><li><code>geography[geographykey] (int64)</code></li><li><code>product[category] (string)</code></li><li><code>product[productkey] (int64)</code></li><li><code>sales[customerkey] (int64)</code></li><li><code>sales[discountamount] (decimal)</code></li><li><code>sales[orderdatekey] (int64)</code></li><li><code>sales[productkey] (int64)</code></li><li><code>sales[revenueamount] (decimal)</code></li><li><code>sales[saleskey] (int64)</code></li></ul></div><div><h3>Common measures</h3><ul><li><code>sales[net revenue]</code></li><li><code>sales[revenue ytd]</code></li><li><code>sales[total revenue]</code></li></ul></div></div></section>
+<section class="card" id="finding-3"><h2>3. Dummy Executive Reporting / Contoso Sales Executive Copy &lt;-&gt; Dummy Regional Sales / Contoso Sales Regional Extended</h2><div class="common-grid"><div><h3>Common tables</h3><ul><li><code>customer</code></li><li><code>date</code></li><li><code>geography</code></li><li><code>product</code></li><li><code>sales</code></li></ul></div><div><h3>Common columns</h3><ul><li><code>customer[customerkey] (int64)</code></li><li><code>customer[customername] (string)</code></li><li><code>customer[segment] (string)</code></li><li><code>date[datekey] (int64)</code></li><li><code>date[fiscalmonth] (string)</code></li><li><code>date[fiscalyear] (int64)</code></li><li><code>geography[country] (string)</code></li><li><code>geography[geographykey] (int64)</code></li><li><code>product[category] (string)</code></li><li><code>product[productkey] (int64)</code></li><li><code>sales[customerkey] (int64)</code></li><li><code>sales[discountamount] (decimal)</code></li><li><code>sales[orderdatekey] (int64)</code></li><li><code>sales[productkey] (int64)</code></li><li><code>sales[revenueamount] (decimal)</code></li><li><code>sales[saleskey] (int64)</code></li></ul></div><div><h3>Common measures</h3><ul><li><code>sales[net revenue]</code></li><li><code>sales[revenue ytd]</code></li><li><code>sales[total revenue]</code></li></ul></div></div></section>
+  </main>
+</body>
+</html>

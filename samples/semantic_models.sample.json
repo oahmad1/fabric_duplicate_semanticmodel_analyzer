@@ -1,0 +1,144 @@
+{
+  "generatedAt": "2026-09-18T18:42:22Z",
+  "models": [
+    {
+      "workspaceId": "finance-prod",
+      "workspaceName": "Finance Analytics",
+      "id": "sales-certified",
+      "name": "Sales Certified",
+      "tables": [
+        { "Name": "Sales", "IsHidden": false },
+        { "Name": "Customer", "IsHidden": false },
+        { "Name": "Product", "IsHidden": false },
+        { "Name": "Date", "IsHidden": false }
+      ],
+      "columns": [
+        { "Table": "Sales", "Name": "SalesAmount", "DataType": "Decimal" },
+        { "Table": "Sales", "Name": "OrderDateKey", "DataType": "Int64" },
+        { "Table": "Sales", "Name": "CustomerKey", "DataType": "Int64" },
+        { "Table": "Sales", "Name": "ProductKey", "DataType": "Int64" },
+        { "Table": "Customer", "Name": "CustomerKey", "DataType": "Int64" },
+        { "Table": "Customer", "Name": "Segment", "DataType": "String" },
+        { "Table": "Product", "Name": "ProductKey", "DataType": "Int64" },
+        { "Table": "Product", "Name": "Category", "DataType": "String" },
+        { "Table": "Date", "Name": "DateKey", "DataType": "Int64" },
+        { "Table": "Date", "Name": "FiscalMonth", "DataType": "String" }
+      ],
+      "measures": [
+        { "Table": "Sales", "Name": "Total Sales", "Expression": "SUM(Sales[SalesAmount])" },
+        { "Table": "Sales", "Name": "Sales YTD", "Expression": "TOTALYTD([Total Sales], 'Date'[Date])" },
+        { "Table": "Sales", "Name": "Average Order", "Expression": "DIVIDE([Total Sales], DISTINCTCOUNT(Sales[OrderDateKey]))" }
+      ],
+      "relationships": [
+        { "FromTable": "Sales", "FromColumn": "CustomerKey", "ToTable": "Customer", "ToColumn": "CustomerKey", "Cardinality": "ManyToOne", "IsActive": true },
+        { "FromTable": "Sales", "FromColumn": "ProductKey", "ToTable": "Product", "ToColumn": "ProductKey", "Cardinality": "ManyToOne", "IsActive": true },
+        { "FromTable": "Sales", "FromColumn": "OrderDateKey", "ToTable": "Date", "ToColumn": "DateKey", "Cardinality": "ManyToOne", "IsActive": true }
+      ],
+      "dataSources": [
+        { "datasourceType": "Sql", "connectionDetails": { "server": "finance-sql.database.windows.net", "database": "SalesDW" } }
+      ]
+    },
+    {
+      "workspaceId": "regional-bi",
+      "workspaceName": "Regional BI",
+      "id": "sales-certified-copy",
+      "name": "Sales Certified Copy",
+      "tables": [
+        { "Name": "Sales", "IsHidden": false },
+        { "Name": "Customer", "IsHidden": false },
+        { "Name": "Product", "IsHidden": false },
+        { "Name": "Date", "IsHidden": false }
+      ],
+      "columns": [
+        { "Table": "Sales", "Name": "SalesAmount", "DataType": "Decimal" },
+        { "Table": "Sales", "Name": "OrderDateKey", "DataType": "Int64" },
+        { "Table": "Sales", "Name": "CustomerKey", "DataType": "Int64" },
+        { "Table": "Sales", "Name": "ProductKey", "DataType": "Int64" },
+        { "Table": "Customer", "Name": "CustomerKey", "DataType": "Int64" },
+        { "Table": "Customer", "Name": "Segment", "DataType": "String" },
+        { "Table": "Product", "Name": "ProductKey", "DataType": "Int64" },
+        { "Table": "Product", "Name": "Category", "DataType": "String" },
+        { "Table": "Date", "Name": "DateKey", "DataType": "Int64" },
+        { "Table": "Date", "Name": "FiscalMonth", "DataType": "String" }
+      ],
+      "measures": [
+        { "Table": "Sales", "Name": "Total Sales", "Expression": "SUM ( Sales[SalesAmount] )" },
+        { "Table": "Sales", "Name": "Sales YTD", "Expression": "TOTALYTD([Total Sales],'Date'[Date])" },
+        { "Table": "Sales", "Name": "Average Order", "Expression": "DIVIDE ( [Total Sales], DISTINCTCOUNT ( Sales[OrderDateKey] ) )" }
+      ],
+      "relationships": [
+        { "FromTable": "Sales", "FromColumn": "CustomerKey", "ToTable": "Customer", "ToColumn": "CustomerKey", "Cardinality": "ManyToOne", "IsActive": true },
+        { "FromTable": "Sales", "FromColumn": "ProductKey", "ToTable": "Product", "ToColumn": "ProductKey", "Cardinality": "ManyToOne", "IsActive": true },
+        { "FromTable": "Sales", "FromColumn": "OrderDateKey", "ToTable": "Date", "ToColumn": "DateKey", "Cardinality": "ManyToOne", "IsActive": true }
+      ],
+      "dataSources": [
+        { "datasourceType": "Sql", "connectionDetails": { "server": "finance-sql.database.windows.net", "database": "SalesDW" } }
+      ]
+    },
+    {
+      "workspaceId": "sales-ops",
+      "workspaceName": "Sales Ops",
+      "id": "sales-department-mart",
+      "name": "Sales Department Mart",
+      "tables": [
+        { "Name": "Sales", "IsHidden": false },
+        { "Name": "Customer", "IsHidden": false },
+        { "Name": "Product", "IsHidden": false },
+        { "Name": "Date", "IsHidden": false },
+        { "Name": "Quota", "IsHidden": false }
+      ],
+      "columns": [
+        { "Table": "Sales", "Name": "SalesAmount", "DataType": "Decimal" },
+        { "Table": "Sales", "Name": "OrderDateKey", "DataType": "Int64" },
+        { "Table": "Sales", "Name": "CustomerKey", "DataType": "Int64" },
+        { "Table": "Sales", "Name": "ProductKey", "DataType": "Int64" },
+        { "Table": "Customer", "Name": "CustomerKey", "DataType": "Int64" },
+        { "Table": "Customer", "Name": "Segment", "DataType": "String" },
+        { "Table": "Product", "Name": "ProductKey", "DataType": "Int64" },
+        { "Table": "Product", "Name": "Category", "DataType": "String" },
+        { "Table": "Date", "Name": "DateKey", "DataType": "Int64" },
+        { "Table": "Date", "Name": "FiscalMonth", "DataType": "String" },
+        { "Table": "Quota", "Name": "QuotaAmount", "DataType": "Decimal" }
+      ],
+      "measures": [
+        { "Table": "Sales", "Name": "Total Sales", "Expression": "SUM(Sales[SalesAmount])" },
+        { "Table": "Sales", "Name": "Sales YTD", "Expression": "TOTALYTD([Total Sales], 'Date'[Date])" },
+        { "Table": "Quota", "Name": "Quota Attainment", "Expression": "DIVIDE([Total Sales], SUM(Quota[QuotaAmount]))" }
+      ],
+      "relationships": [
+        { "FromTable": "Sales", "FromColumn": "CustomerKey", "ToTable": "Customer", "ToColumn": "CustomerKey", "Cardinality": "ManyToOne", "IsActive": true },
+        { "FromTable": "Sales", "FromColumn": "ProductKey", "ToTable": "Product", "ToColumn": "ProductKey", "Cardinality": "ManyToOne", "IsActive": true },
+        { "FromTable": "Sales", "FromColumn": "OrderDateKey", "ToTable": "Date", "ToColumn": "DateKey", "Cardinality": "ManyToOne", "IsActive": true }
+      ],
+      "dataSources": [
+        { "datasourceType": "Sql", "connectionDetails": { "server": "finance-sql.database.windows.net", "database": "SalesDW" } }
+      ]
+    },
+    {
+      "workspaceId": "hr",
+      "workspaceName": "HR Analytics",
+      "id": "hr-headcount",
+      "name": "HR Headcount",
+      "tables": [
+        { "Name": "Employee", "IsHidden": false },
+        { "Name": "Department", "IsHidden": false }
+      ],
+      "columns": [
+        { "Table": "Employee", "Name": "EmployeeKey", "DataType": "Int64" },
+        { "Table": "Employee", "Name": "HireDate", "DataType": "DateTime" },
+        { "Table": "Department", "Name": "DepartmentKey", "DataType": "Int64" }
+      ],
+      "measures": [
+        { "Table": "Employee", "Name": "Headcount", "Expression": "DISTINCTCOUNT(Employee[EmployeeKey])" }
+      ],
+      "relationships": [
+        { "FromTable": "Employee", "FromColumn": "DepartmentKey", "ToTable": "Department", "ToColumn": "DepartmentKey", "Cardinality": "ManyToOne", "IsActive": true }
+      ],
+      "dataSources": [
+        { "datasourceType": "Sql", "connectionDetails": { "server": "hr-sql.database.windows.net", "database": "HRDW" } }
+      ]
+    }
+  ],
+  "warnings": []
+}
+

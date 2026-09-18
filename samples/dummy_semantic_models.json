@@ -1,0 +1,244 @@
+{
+  "generatedAt": "2026-09-18T19:58:17Z",
+  "description": "Synthetic semantic model metadata for offline duplicate-detection testing. These are not real customer models.",
+  "models": [
+    {
+      "workspaceId": "dummy-enterprise-bi",
+      "workspaceName": "Dummy Enterprise BI",
+      "id": "contoso-sales-certified",
+      "name": "Contoso Sales Certified",
+      "tables": [
+        { "Name": "Sales", "IsHidden": false },
+        { "Name": "Customer", "IsHidden": false },
+        { "Name": "Product", "IsHidden": false },
+        { "Name": "Date", "IsHidden": false },
+        { "Name": "Geography", "IsHidden": false }
+      ],
+      "columns": [
+        { "Table": "Sales", "Name": "SalesKey", "DataType": "Int64" },
+        { "Table": "Sales", "Name": "OrderDateKey", "DataType": "Int64" },
+        { "Table": "Sales", "Name": "CustomerKey", "DataType": "Int64" },
+        { "Table": "Sales", "Name": "ProductKey", "DataType": "Int64" },
+        { "Table": "Sales", "Name": "RevenueAmount", "DataType": "Decimal" },
+        { "Table": "Sales", "Name": "DiscountAmount", "DataType": "Decimal" },
+        { "Table": "Customer", "Name": "CustomerKey", "DataType": "Int64" },
+        { "Table": "Customer", "Name": "CustomerName", "DataType": "String" },
+        { "Table": "Customer", "Name": "Segment", "DataType": "String" },
+        { "Table": "Product", "Name": "ProductKey", "DataType": "Int64" },
+        { "Table": "Product", "Name": "Category", "DataType": "String" },
+        { "Table": "Date", "Name": "DateKey", "DataType": "Int64" },
+        { "Table": "Date", "Name": "FiscalMonth", "DataType": "String" },
+        { "Table": "Date", "Name": "FiscalYear", "DataType": "Int64" },
+        { "Table": "Geography", "Name": "GeographyKey", "DataType": "Int64" },
+        { "Table": "Geography", "Name": "Country", "DataType": "String" }
+      ],
+      "measures": [
+        { "Table": "Sales", "Name": "Total Revenue", "Expression": "SUM(Sales[RevenueAmount])" },
+        { "Table": "Sales", "Name": "Net Revenue", "Expression": "[Total Revenue] - SUM(Sales[DiscountAmount])" },
+        { "Table": "Sales", "Name": "Revenue YTD", "Expression": "TOTALYTD([Total Revenue], 'Date'[Date])" },
+        { "Table": "Sales", "Name": "Average Revenue Per Customer", "Expression": "DIVIDE([Total Revenue], DISTINCTCOUNT(Sales[CustomerKey]))" },
+        { "Table": "Sales", "Name": "Discount Rate", "Expression": "DIVIDE(SUM(Sales[DiscountAmount]), [Total Revenue])" }
+      ],
+      "relationships": [
+        { "FromTable": "Sales", "FromColumn": "CustomerKey", "ToTable": "Customer", "ToColumn": "CustomerKey", "Cardinality": "ManyToOne", "IsActive": true },
+        { "FromTable": "Sales", "FromColumn": "ProductKey", "ToTable": "Product", "ToColumn": "ProductKey", "Cardinality": "ManyToOne", "IsActive": true },
+        { "FromTable": "Sales", "FromColumn": "OrderDateKey", "ToTable": "Date", "ToColumn": "DateKey", "Cardinality": "ManyToOne", "IsActive": true },
+        { "FromTable": "Customer", "FromColumn": "GeographyKey", "ToTable": "Geography", "ToColumn": "GeographyKey", "Cardinality": "ManyToOne", "IsActive": true }
+      ],
+      "dataSources": [
+        { "datasourceType": "Sql", "connectionDetails": { "server": "dummy-sql.database.windows.net", "database": "SalesDW" } }
+      ]
+    },
+    {
+      "workspaceId": "dummy-executive-reporting",
+      "workspaceName": "Dummy Executive Reporting",
+      "id": "contoso-sales-exec-copy",
+      "name": "Contoso Sales Executive Copy",
+      "tables": [
+        { "Name": "Sales", "IsHidden": false },
+        { "Name": "Customer", "IsHidden": false },
+        { "Name": "Product", "IsHidden": false },
+        { "Name": "Date", "IsHidden": false },
+        { "Name": "Geography", "IsHidden": false }
+      ],
+      "columns": [
+        { "Table": "Sales", "Name": "SalesKey", "DataType": "Int64" },
+        { "Table": "Sales", "Name": "OrderDateKey", "DataType": "Int64" },
+        { "Table": "Sales", "Name": "CustomerKey", "DataType": "Int64" },
+        { "Table": "Sales", "Name": "ProductKey", "DataType": "Int64" },
+        { "Table": "Sales", "Name": "RevenueAmount", "DataType": "Decimal" },
+        { "Table": "Sales", "Name": "DiscountAmount", "DataType": "Decimal" },
+        { "Table": "Customer", "Name": "CustomerKey", "DataType": "Int64" },
+        { "Table": "Customer", "Name": "CustomerName", "DataType": "String" },
+        { "Table": "Customer", "Name": "Segment", "DataType": "String" },
+        { "Table": "Product", "Name": "ProductKey", "DataType": "Int64" },
+        { "Table": "Product", "Name": "Category", "DataType": "String" },
+        { "Table": "Date", "Name": "DateKey", "DataType": "Int64" },
+        { "Table": "Date", "Name": "FiscalMonth", "DataType": "String" },
+        { "Table": "Date", "Name": "FiscalYear", "DataType": "Int64" },
+        { "Table": "Geography", "Name": "GeographyKey", "DataType": "Int64" },
+        { "Table": "Geography", "Name": "Country", "DataType": "String" }
+      ],
+      "measures": [
+        { "Table": "Sales", "Name": "Total Revenue", "Expression": "SUM ( Sales[RevenueAmount] )" },
+        { "Table": "Sales", "Name": "Net Revenue", "Expression": "[Total Revenue]-SUM(Sales[DiscountAmount])" },
+        { "Table": "Sales", "Name": "Revenue YTD", "Expression": "TOTALYTD ( [Total Revenue], 'Date'[Date] )" },
+        { "Table": "Sales", "Name": "Average Revenue Per Customer", "Expression": "DIVIDE([Total Revenue],DISTINCTCOUNT(Sales[CustomerKey]))" },
+        { "Table": "Sales", "Name": "Discount Rate", "Expression": "DIVIDE ( SUM ( Sales[DiscountAmount] ), [Total Revenue] )" }
+      ],
+      "relationships": [
+        { "FromTable": "Sales", "FromColumn": "CustomerKey", "ToTable": "Customer", "ToColumn": "CustomerKey", "Cardinality": "ManyToOne", "IsActive": true },
+        { "FromTable": "Sales", "FromColumn": "ProductKey", "ToTable": "Product", "ToColumn": "ProductKey", "Cardinality": "ManyToOne", "IsActive": true },
+        { "FromTable": "Sales", "FromColumn": "OrderDateKey", "ToTable": "Date", "ToColumn": "DateKey", "Cardinality": "ManyToOne", "IsActive": true },
+        { "FromTable": "Customer", "FromColumn": "GeographyKey", "ToTable": "Geography", "ToColumn": "GeographyKey", "Cardinality": "ManyToOne", "IsActive": true }
+      ],
+      "dataSources": [
+        { "datasourceType": "Sql", "connectionDetails": { "server": "dummy-sql.database.windows.net", "database": "SalesDW" } }
+      ]
+    },
+    {
+      "workspaceId": "dummy-regional-sales",
+      "workspaceName": "Dummy Regional Sales",
+      "id": "contoso-sales-regional-extended",
+      "name": "Contoso Sales Regional Extended",
+      "tables": [
+        { "Name": "Sales", "IsHidden": false },
+        { "Name": "Customer", "IsHidden": false },
+        { "Name": "Product", "IsHidden": false },
+        { "Name": "Date", "IsHidden": false },
+        { "Name": "Geography", "IsHidden": false },
+        { "Name": "Quota", "IsHidden": false },
+        { "Name": "SalesTerritory", "IsHidden": false }
+      ],
+      "columns": [
+        { "Table": "Sales", "Name": "SalesKey", "DataType": "Int64" },
+        { "Table": "Sales", "Name": "OrderDateKey", "DataType": "Int64" },
+        { "Table": "Sales", "Name": "CustomerKey", "DataType": "Int64" },
+        { "Table": "Sales", "Name": "ProductKey", "DataType": "Int64" },
+        { "Table": "Sales", "Name": "RevenueAmount", "DataType": "Decimal" },
+        { "Table": "Sales", "Name": "DiscountAmount", "DataType": "Decimal" },
+        { "Table": "Customer", "Name": "CustomerKey", "DataType": "Int64" },
+        { "Table": "Customer", "Name": "CustomerName", "DataType": "String" },
+        { "Table": "Customer", "Name": "Segment", "DataType": "String" },
+        { "Table": "Product", "Name": "ProductKey", "DataType": "Int64" },
+        { "Table": "Product", "Name": "Category", "DataType": "String" },
+        { "Table": "Date", "Name": "DateKey", "DataType": "Int64" },
+        { "Table": "Date", "Name": "FiscalMonth", "DataType": "String" },
+        { "Table": "Date", "Name": "FiscalYear", "DataType": "Int64" },
+        { "Table": "Geography", "Name": "GeographyKey", "DataType": "Int64" },
+        { "Table": "Geography", "Name": "Country", "DataType": "String" },
+        { "Table": "Quota", "Name": "QuotaAmount", "DataType": "Decimal" },
+        { "Table": "SalesTerritory", "Name": "TerritoryName", "DataType": "String" }
+      ],
+      "measures": [
+        { "Table": "Sales", "Name": "Total Revenue", "Expression": "SUM(Sales[RevenueAmount])" },
+        { "Table": "Sales", "Name": "Net Revenue", "Expression": "[Total Revenue] - SUM(Sales[DiscountAmount])" },
+        { "Table": "Sales", "Name": "Revenue YTD", "Expression": "TOTALYTD([Total Revenue], 'Date'[Date])" },
+        { "Table": "Quota", "Name": "Quota Attainment", "Expression": "DIVIDE([Total Revenue], SUM(Quota[QuotaAmount]))" },
+        { "Table": "Sales", "Name": "Regional Revenue", "Expression": "CALCULATE([Total Revenue], VALUES(SalesTerritory[TerritoryName]))" }
+      ],
+      "relationships": [
+        { "FromTable": "Sales", "FromColumn": "CustomerKey", "ToTable": "Customer", "ToColumn": "CustomerKey", "Cardinality": "ManyToOne", "IsActive": true },
+        { "FromTable": "Sales", "FromColumn": "ProductKey", "ToTable": "Product", "ToColumn": "ProductKey", "Cardinality": "ManyToOne", "IsActive": true },
+        { "FromTable": "Sales", "FromColumn": "OrderDateKey", "ToTable": "Date", "ToColumn": "DateKey", "Cardinality": "ManyToOne", "IsActive": true },
+        { "FromTable": "Customer", "FromColumn": "GeographyKey", "ToTable": "Geography", "ToColumn": "GeographyKey", "Cardinality": "ManyToOne", "IsActive": true }
+      ],
+      "dataSources": [
+        { "datasourceType": "Sql", "connectionDetails": { "server": "dummy-sql.database.windows.net", "database": "SalesDW" } }
+      ]
+    },
+    {
+      "workspaceId": "dummy-operations",
+      "workspaceName": "Dummy Operations",
+      "id": "contoso-inventory-operations",
+      "name": "Contoso Inventory Operations",
+      "tables": [
+        { "Name": "InventorySnapshot", "IsHidden": false },
+        { "Name": "Warehouse", "IsHidden": false },
+        { "Name": "Product", "IsHidden": false },
+        { "Name": "Date", "IsHidden": false }
+      ],
+      "columns": [
+        { "Table": "InventorySnapshot", "Name": "SnapshotDateKey", "DataType": "Int64" },
+        { "Table": "InventorySnapshot", "Name": "ProductKey", "DataType": "Int64" },
+        { "Table": "InventorySnapshot", "Name": "WarehouseKey", "DataType": "Int64" },
+        { "Table": "InventorySnapshot", "Name": "OnHandQuantity", "DataType": "Int64" },
+        { "Table": "Warehouse", "Name": "WarehouseKey", "DataType": "Int64" },
+        { "Table": "Warehouse", "Name": "WarehouseName", "DataType": "String" },
+        { "Table": "Product", "Name": "ProductKey", "DataType": "Int64" },
+        { "Table": "Product", "Name": "Category", "DataType": "String" },
+        { "Table": "Date", "Name": "DateKey", "DataType": "Int64" },
+        { "Table": "Date", "Name": "FiscalMonth", "DataType": "String" }
+      ],
+      "measures": [
+        { "Table": "InventorySnapshot", "Name": "On Hand Quantity", "Expression": "SUM(InventorySnapshot[OnHandQuantity])" },
+        { "Table": "InventorySnapshot", "Name": "Inventory Turns", "Expression": "DIVIDE([On Hand Quantity], DISTINCTCOUNT('Date'[FiscalMonth]))" }
+      ],
+      "relationships": [
+        { "FromTable": "InventorySnapshot", "FromColumn": "ProductKey", "ToTable": "Product", "ToColumn": "ProductKey", "Cardinality": "ManyToOne", "IsActive": true },
+        { "FromTable": "InventorySnapshot", "FromColumn": "WarehouseKey", "ToTable": "Warehouse", "ToColumn": "WarehouseKey", "Cardinality": "ManyToOne", "IsActive": true },
+        { "FromTable": "InventorySnapshot", "FromColumn": "SnapshotDateKey", "ToTable": "Date", "ToColumn": "DateKey", "Cardinality": "ManyToOne", "IsActive": true }
+      ],
+      "dataSources": [
+        { "datasourceType": "Sql", "connectionDetails": { "server": "dummy-sql.database.windows.net", "database": "OperationsDW" } }
+      ]
+    },
+    {
+      "workspaceId": "dummy-hr",
+      "workspaceName": "Dummy HR",
+      "id": "contoso-hr-headcount",
+      "name": "Contoso HR Headcount",
+      "tables": [
+        { "Name": "Employee", "IsHidden": false },
+        { "Name": "Department", "IsHidden": false },
+        { "Name": "Date", "IsHidden": false }
+      ],
+      "columns": [
+        { "Table": "Employee", "Name": "EmployeeKey", "DataType": "Int64" },
+        { "Table": "Employee", "Name": "DepartmentKey", "DataType": "Int64" },
+        { "Table": "Employee", "Name": "HireDateKey", "DataType": "Int64" },
+        { "Table": "Employee", "Name": "TerminationDateKey", "DataType": "Int64" },
+        { "Table": "Department", "Name": "DepartmentKey", "DataType": "Int64" },
+        { "Table": "Department", "Name": "DepartmentName", "DataType": "String" },
+        { "Table": "Date", "Name": "DateKey", "DataType": "Int64" }
+      ],
+      "measures": [
+        { "Table": "Employee", "Name": "Headcount", "Expression": "DISTINCTCOUNT(Employee[EmployeeKey])" },
+        { "Table": "Employee", "Name": "New Hires", "Expression": "COUNTROWS(FILTER(Employee, NOT ISBLANK(Employee[HireDateKey])))" }
+      ],
+      "relationships": [
+        { "FromTable": "Employee", "FromColumn": "DepartmentKey", "ToTable": "Department", "ToColumn": "DepartmentKey", "Cardinality": "ManyToOne", "IsActive": true },
+        { "FromTable": "Employee", "FromColumn": "HireDateKey", "ToTable": "Date", "ToColumn": "DateKey", "Cardinality": "ManyToOne", "IsActive": true }
+      ],
+      "dataSources": [
+        { "datasourceType": "Sql", "connectionDetails": { "server": "dummy-sql.database.windows.net", "database": "HRDW" } }
+      ]
+    },
+    {
+      "workspaceId": "dummy-sales-experiments",
+      "workspaceName": "Dummy Sales Experiments",
+      "id": "contoso-sales-kpi-thin",
+      "name": "Contoso Sales KPI Thin Model",
+      "tables": [
+        { "Name": "SalesKpiSnapshot", "IsHidden": false },
+        { "Name": "ExecutiveMetric", "IsHidden": false }
+      ],
+      "columns": [
+        { "Table": "SalesKpiSnapshot", "Name": "SnapshotDate", "DataType": "DateTime" },
+        { "Table": "SalesKpiSnapshot", "Name": "RevenueKpi", "DataType": "Decimal" },
+        { "Table": "SalesKpiSnapshot", "Name": "PipelineKpi", "DataType": "Decimal" },
+        { "Table": "ExecutiveMetric", "Name": "MetricName", "DataType": "String" }
+      ],
+      "measures": [
+        { "Table": "SalesKpiSnapshot", "Name": "Revenue KPI", "Expression": "SUM(SalesKpiSnapshot[RevenueKpi])" },
+        { "Table": "SalesKpiSnapshot", "Name": "Pipeline KPI", "Expression": "SUM(SalesKpiSnapshot[PipelineKpi])" }
+      ],
+      "relationships": [],
+      "dataSources": [
+        { "datasourceType": "Sql", "connectionDetails": { "server": "dummy-sql.database.windows.net", "database": "SalesDW" } }
+      ]
+    }
+  ],
+  "warnings": []
+}
+
