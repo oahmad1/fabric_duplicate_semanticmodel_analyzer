@@ -2,17 +2,17 @@
 
 This repository contains a skills-for-fabric style governance skill and CLI scanner that identifies likely duplicate or overlapping Power BI semantic models in Microsoft Fabric.
 
-## Why this is a good IP idea
+## What this does
 
-Semantic model sprawl is a common Fabric and Power BI governance problem. A skill that can inventory models, compare model objects, and produce consolidation candidates is useful because it turns a manual Center of Excellence review into a repeatable audit.
+This analyzer helps teams identify likely duplicate or overlapping Power BI semantic models in Microsoft Fabric.
 
-The approach mirrors the governance intent of tools such as Measure Killer model similarity, but keeps the implementation open-ended:
+It supports a repeatable governance workflow:
 
 - Discover semantic models through Fabric and Power BI APIs.
 - Extract metadata with DAX `INFO.VIEW.*` rowsets.
 - Compare normalized tables, columns, measures, relationships, and data sources.
 - Score likely duplicates and high-overlap models.
-- Produce an auditable JSON, CSV, or Markdown report.
+- Produce auditable JSON, CSV, Markdown, or HTML reports.
 
 ## Contents
 

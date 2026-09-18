@@ -1,7 +1,7 @@
 ---
 name: powerbi-semantic-model-governance-cli
 description: >
-  Analyze duplicate and overlapping Power BI semantic models in Microsoft Fabric using Fabric REST APIs, Power BI REST APIs, DAX INFO.VIEW metadata, and CLI similarity scoring. Use when the user wants to: (1) find duplicate semantic models or dataset copies, (2) audit model sprawl across workspaces, (3) compare tables, columns, measures, relationships, and data sources, (4) prioritize consolidation candidates. Triggers: "duplicate semantic model", "semantic model sprawl", "model similarity", "dataset duplication audit", "find overlapping Power BI models", "Measure Killer alternative".
+  Analyze duplicate and overlapping Power BI semantic models in Microsoft Fabric using Fabric REST APIs, Power BI REST APIs, DAX INFO.VIEW metadata, and CLI similarity scoring. Use when the user wants to: (1) find duplicate semantic models or dataset copies, (2) audit model sprawl across workspaces, (3) compare tables, columns, measures, relationships, and data sources, (4) prioritize consolidation candidates. Triggers: "duplicate semantic model", "semantic model sprawl", "model similarity", "dataset duplication audit", "find overlapping Power BI models".
 ---
 
 > **Update Check - ONCE PER SESSION (mandatory)**
